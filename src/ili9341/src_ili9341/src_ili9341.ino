@@ -1,3 +1,4 @@
+
 /* 
  * TFT
  *  
@@ -11,6 +12,7 @@
 #include <Adafruit_GFX.h>
 #include <avr/wdt.h>
 #include <Adafruit_ILI9341.h>
+
 
 
 #define COLOR_EMPTY                       0x0000 /* -- */
@@ -40,7 +42,7 @@
 #define MATRIX_HEIGHT                     8
 #define MAX_CELLS                         16
 #define CELL_PIXELS                       8 // CHANGE: 8
-#define BAUD_RATES                        115200
+#define BAUD_RATES                        31250//115200
 #define SCREEN_WIDTH                      240
 #define SCREEN_HEIGHT                     320
 #define BUTTON_DEBOUNCE                   500 /* milliseconds */
@@ -454,7 +456,7 @@ void printOption(byte option, char mode) {
 }
 
 void writeMidi(unsigned char* data) {
-  Serial.write(data, 3); /* Write data */
+  Serial.write(data, 3); /* Write data to Serial */
   Serial.flush();
 }
 
