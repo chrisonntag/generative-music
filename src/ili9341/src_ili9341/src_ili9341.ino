@@ -84,7 +84,7 @@
  */
 #define TFT_CS    -1
 #define TFT_RST   6     // TFT RST / RES pin is connected to Nano Port D3
-#define TFT_DC    3     // TFT DC  pin is connected to Nano Port D4
+#define TFT_DC    9     // TFT DC  pin is connected to Nano Port D4
 // initialize ILI9341 TFT library with hardware SPI module
 //SCK (CLK) ---> Nanao Port D13
 //MOSI(DIN) ---> Nano Port D11
@@ -198,13 +198,12 @@ void setup(void) {
   pinMode(PIN_BTN, INPUT_PULLUP);
 
   /* Encoder rotation */
-  /*digitalWrite(PIN_CW, LOW); // Turn off PWM Timer */
-  /*digitalWrite(PIN_CWW, LOW); // Turn off PWM Timer */
-  /*pinMode(PIN_CW, INPUT_PULLUP);
+  digitalWrite(PIN_CW, LOW); // Turn off PWM Timer */
+  digitalWrite(PIN_CWW, LOW); // Turn off PWM Timer */
+  pinMode(PIN_CW, INPUT_PULLUP);
   pinMode(PIN_CWW, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(PIN_CW), EncoderInterrupt, CHANGE);
   attachInterrupt(digitalPinToInterrupt(PIN_CWW), EncoderInterrupt, CHANGE);
-  */
 
   /* Random initialization */
   randomSeed(analogRead(0));
@@ -423,7 +422,7 @@ void printOption(byte option, char mode) {
     }
     else if (option == OPTION_CELL_TYPE) {
       display.fillRect(24, (MATRIX_HEIGHT * CELL_PIXELS) + 41, 20, 9, color);
-      display.setTextColor(((mode == 'S') || (mode == 'E')) ? COLOR_EMPTY : COLOR_TEXT_2);  
+      display.setTextColor(((mode == 'S') || (mode == 'E')) ? COLOR_EMPTY : COLOR_TEXT_1);
       display.setCursor(25, (MATRIX_HEIGHT * CELL_PIXELS) + 42);
       printCellTypeToString(currentCell.type);
     }
