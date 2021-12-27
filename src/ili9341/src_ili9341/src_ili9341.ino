@@ -29,6 +29,7 @@
 #define COLOR_SELECT                      0x07E0 /*  | */
 #define COLOR_EDIT                        0x07FF /*  | */
 #define COLOR_NONE                        0x0001 /* -- */
+#define TEXT_SIZE                         2
 #define PIN_CS                            -1
 #define PIN_A0                            6
 #define PIN_DC                            3
@@ -41,7 +42,7 @@
 #define MATRIX_WIDTH                      8
 #define MATRIX_HEIGHT                     8
 #define MAX_CELLS                         16
-#define CELL_PIXELS                       8 // CHANGE: 8
+#define CELL_PIXELS                       8 * TEXT_SIZE // CHANGE: 8
 #define BAUD_RATES                        31250//115200
 #define SCREEN_WIDTH                      240
 #define SCREEN_HEIGHT                     320
@@ -192,7 +193,7 @@ void setup(void) {
   //CHANGE: display.scroll(0);
   display.setScrollMargins(0, 0);
   
-  display.setTextSize(1);
+  display.setTextSize(TEXT_SIZE);
 
   display.setTextColor(ILI9341_WHITE);
 
@@ -221,16 +222,16 @@ void setup(void) {
 
   /* Mode X and Y */
   display.setTextColor(COLOR_TEXT_1);  
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 2, 22, 11, COLOR_BORDER);
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 51, 2, 9, 11, COLOR_BORDER); 
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 12, 30, 11, COLOR_BORDER);
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 22, 30, 11, COLOR_BORDER);
-  display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 53, 3); display.print("x");    
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 38, 22, 11, COLOR_BORDER);
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 51, 38, 9, 11, COLOR_BORDER); 
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 48, 30, 11, COLOR_BORDER);
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 58, 30, 11, COLOR_BORDER);
-  display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 53, 39); display.print("y");    
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 2, 22*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 72 /*51*/, 2, 9*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER); 
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 12*TEXT_SIZE, 30*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 22*TEXT_SIZE, 30*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 76, 3); display.print("x");    
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 38*TEXT_SIZE, 22*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 72 /*51*/, 38*TEXT_SIZE, 9*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER); 
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 48*TEXT_SIZE, 30*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 58*TEXT_SIZE, 30*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 76, 39*TEXT_SIZE); display.print("y");    
   printOption(OPTION_PITCH_X, 'U');
   printOption(OPTION_MODE_X, 'U');
   printOption(OPTION_ORDER_X, 'U');
@@ -239,11 +240,11 @@ void setup(void) {
   printOption(OPTION_ORDER_Y, 'U');
 
   /* Info */
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 10, (MATRIX_HEIGHT * CELL_PIXELS) + 10, 51, 11, COLOR_BORDER);
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 10, (MATRIX_HEIGHT * CELL_PIXELS) + 20, 51, 11, COLOR_BORDER);
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 10, (MATRIX_HEIGHT * CELL_PIXELS) + 30, 51, 11, COLOR_BORDER);
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 10, (MATRIX_HEIGHT * CELL_PIXELS) + 40, 51, 11, COLOR_BORDER);
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 10, (MATRIX_HEIGHT * CELL_PIXELS) + 50, 51, 11, COLOR_BORDER);
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 10, (MATRIX_HEIGHT * CELL_PIXELS) + 10*TEXT_SIZE, 51*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 10, (MATRIX_HEIGHT * CELL_PIXELS) + 20*TEXT_SIZE, 51*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 10, (MATRIX_HEIGHT * CELL_PIXELS) + 30*TEXT_SIZE, 51*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 10, (MATRIX_HEIGHT * CELL_PIXELS) + 40*TEXT_SIZE, 51*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 10, (MATRIX_HEIGHT * CELL_PIXELS) + 50*TEXT_SIZE, 51*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
   printOption(OPTION_BPM, 'S');
   printOption(OPTION_SCREEN, 'U');
   printOption(OPTION_CHANNEL, 'U');
@@ -252,11 +253,11 @@ void setup(void) {
 
   /* Cell */
   display.setTextColor(COLOR_TEXT_1);  
-  display.drawRect(2, (MATRIX_HEIGHT * CELL_PIXELS) + 40, 22, 11, COLOR_BORDER);
-  display.drawRect(23, (MATRIX_HEIGHT * CELL_PIXELS) + 40, 22, 11, COLOR_BORDER);
-  display.drawRect(2, (MATRIX_HEIGHT * CELL_PIXELS) + 50, 22, 11, COLOR_BORDER);
-  display.drawRect(23, (MATRIX_HEIGHT * CELL_PIXELS) + 50, 22, 11, COLOR_BORDER);
-  display.drawRect(46, (MATRIX_HEIGHT * CELL_PIXELS) + 40, 22, 21, COLOR_BORDER);
+  display.drawRect(2, (MATRIX_HEIGHT * CELL_PIXELS) + 40*TEXT_SIZE, 22*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.drawRect(23*TEXT_SIZE, (MATRIX_HEIGHT * CELL_PIXELS) + 40*TEXT_SIZE, 22*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.drawRect(2, (MATRIX_HEIGHT * CELL_PIXELS) + 50*TEXT_SIZE, 22*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.drawRect(23*TEXT_SIZE, (MATRIX_HEIGHT * CELL_PIXELS) + 50*TEXT_SIZE, 22*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.drawRect(46*TEXT_SIZE, (MATRIX_HEIGHT * CELL_PIXELS) + 40*TEXT_SIZE, 22*TEXT_SIZE, 21*TEXT_SIZE, COLOR_BORDER);
   printOption(OPTION_CELL_ID, 'U');
   printOption(OPTION_CELL_TYPE, 'U');
   printOption(OPTION_CELL_X, 'U');
@@ -329,29 +330,35 @@ void printPitchToNote(byte pitch) {
 }
 
 void printNotesY(void) {
+  int matrixHeight = (MATRIX_HEIGHT * CELL_PIXELS) + 3 * TEXT_SIZE;
+  int matrixWidth = (MATRIX_WIDTH * CELL_PIXELS) + 3 * TEXT_SIZE;
   /* Clean */
-  display.fillRect((MATRIX_WIDTH * CELL_PIXELS) + 3, 1, 26, (MATRIX_HEIGHT * CELL_PIXELS) + 3, COLOR_EMPTY);
+  display.fillRect(matrixWidth, 1, 34, matrixHeight, COLOR_EMPTY);
   /* Print */
   display.setTextColor(COLOR_TEXT_2);  
   for (byte i = 0; i < 8; i++) {
+    int margin = 2 * TEXT_SIZE + (i * 8 * TEXT_SIZE);
     if(i % 2 == 0) processPitchesOnOff(); /* Process pitches meanwhile */
-    display.setCursor(71, 2 + (i * 8));  
+    display.setCursor(matrixWidth, margin);
     printPitchToNote(pitchesY[currentScreen][i]);
   }
 }
 
 void printNotesX(void) {
+  int matrixHeight = (MATRIX_HEIGHT * CELL_PIXELS) + 3 * TEXT_SIZE;
+  int matrixWidth = (MATRIX_WIDTH * CELL_PIXELS) + 3 * TEXT_SIZE;
   /* Clean */
-  display.fillRect(0, (MATRIX_HEIGHT * CELL_PIXELS) + 3, (MATRIX_WIDTH * CELL_PIXELS) + 3, 26, COLOR_EMPTY);
+  display.fillRect(0, matrixHeight, matrixWidth, 34, COLOR_EMPTY);
   /* Print */
   char note, hash, octave;
   display.setTextColor(COLOR_TEXT_2);  
   for (byte i = 0; i < 8; i++) {
+    int margin = 3 * TEXT_SIZE + (i * 8 * TEXT_SIZE);
     if(i % 2 == 0) processPitchesOnOff(); /* Process pitches meanwhile */
     pitchToNote(pitchesX[currentScreen][i], &note, &hash, &octave);
-    display.setCursor(3 + (i * 8), 70); display.print(note);    
-    if (hash != ' ') { display.setCursor(3 + (i * 8), 78); display.print(hash); }
-    display.setCursor(3 + (i * 8), (hash != ' ') ? 86 : 78); display.print(octave);
+    display.setCursor(margin, matrixHeight); display.print(note);    
+    if (hash != ' ') { display.setCursor(margin, matrixHeight + 16); display.print(hash); }
+    display.setCursor(margin, (hash != ' ') ? matrixHeight + 32 : matrixHeight + 16); display.print(octave);
   }
 }
 
@@ -380,32 +387,32 @@ void printOption(byte option, char mode) {
   else if ((option >= OPTION_CELL_ID) && (option <= OPTION_CELL_OK)) goto fourth_area;
   else return;
   first_area:
-    display.fillRect((MATRIX_WIDTH * CELL_PIXELS) + 31, 3 + (10 * (option - OPTION_PITCH_X)), (option == OPTION_PITCH_X) ? 20 : 28, 9, color);
+    display.fillRect((MATRIX_WIDTH * CELL_PIXELS) + 31, 3*TEXT_SIZE + (10*TEXT_SIZE * (option - OPTION_PITCH_X)), (option == OPTION_PITCH_X) ? 20*TEXT_SIZE : 28*TEXT_SIZE, 9*TEXT_SIZE, color);
     display.setTextColor(((mode == 'S') || (mode == 'E')) ? COLOR_EMPTY : COLOR_TEXT_2);  
-    display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 32, 4 + (10 * (option - OPTION_PITCH_X)));  
+    display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 34, 4*TEXT_SIZE + (10*TEXT_SIZE * (option - OPTION_PITCH_X)));  
     if (option == OPTION_PITCH_X) printPitchToNote(pitchX[currentScreen]);
     else if (option == OPTION_MODE_X) printModeToString(modeX[currentScreen]);
     else if (option == OPTION_ORDER_X) printOrderToString(orderX[currentScreen]);
     return;
   second_area:
-    display.fillRect((MATRIX_WIDTH * CELL_PIXELS) + 31, 39 + (10 * (option - OPTION_PITCH_Y)), (option == OPTION_PITCH_Y) ? 20 : 28, 9, color);
+    display.fillRect((MATRIX_WIDTH * CELL_PIXELS) + 31, 39*TEXT_SIZE + (10*TEXT_SIZE * (option - OPTION_PITCH_Y)), (option == OPTION_PITCH_Y) ? 20*TEXT_SIZE : 28*TEXT_SIZE, 9*TEXT_SIZE, color);
     display.setTextColor(((mode == 'S') || (mode == 'E')) ? COLOR_EMPTY : COLOR_TEXT_2);  
-    display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 32, 40 + (10 * (option - OPTION_PITCH_Y)));  
+    display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 34, 40*TEXT_SIZE + (10*TEXT_SIZE * (option - OPTION_PITCH_Y)));  
     if (option == OPTION_PITCH_Y) printPitchToNote(pitchY[currentScreen]);
     else if (option == OPTION_MODE_Y) printModeToString(modeY[currentScreen]);
     else if (option == OPTION_ORDER_Y) printOrderToString(orderY[currentScreen]);
     return;
   third_area:
-    display.fillRect((MATRIX_WIDTH * CELL_PIXELS) + 11, (MATRIX_HEIGHT * CELL_PIXELS) + 11 + (10 * (option - OPTION_BPM)), 49, 9, color);
+    display.fillRect((MATRIX_WIDTH * CELL_PIXELS) + 11, (MATRIX_HEIGHT * CELL_PIXELS) + 11*TEXT_SIZE + (10*TEXT_SIZE * (option - OPTION_BPM)), 49*TEXT_SIZE, 9*TEXT_SIZE, color);
     display.setTextColor(((mode == 'S') || (mode == 'E')) ? COLOR_EMPTY : COLOR_TEXT_1);  
-    display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 12, (MATRIX_HEIGHT * CELL_PIXELS) + 12 + (10 * (option - OPTION_BPM)));  
+    display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 12, (MATRIX_HEIGHT * CELL_PIXELS) + 12*TEXT_SIZE + (10*TEXT_SIZE * (option - OPTION_BPM)));  
     if (option == OPTION_BPM) display.print("BPM");    
     else if (option == OPTION_SCREEN) display.print("SCR");    
     else if (option == OPTION_CHANNEL) display.print("CH");    
     else if (option == OPTION_VELOCITY) display.print("VEL");    
     else if (option == OPTION_DURATION) display.print("DUR");    
     display.setTextColor(((mode == 'S') || (mode == 'E')) ? COLOR_EMPTY : COLOR_TEXT_2);  
-    display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 42, (MATRIX_HEIGHT * CELL_PIXELS) + 12 + (10 * (option - OPTION_BPM)));  
+    display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 72, (MATRIX_HEIGHT * CELL_PIXELS) + 12*TEXT_SIZE + (10*TEXT_SIZE * (option - OPTION_BPM)));  
     if (option == OPTION_BPM) display.print((int)bpm);    
     else if (option == OPTION_SCREEN) display.print((int)currentScreen + 1);    
     else if (option == OPTION_CHANNEL) display.print((int)channel[currentScreen] + 1);    
@@ -414,41 +421,41 @@ void printOption(byte option, char mode) {
     return;
   fourth_area:
     if (option == OPTION_CELL_ID) {
-      display.fillRect(3, (MATRIX_HEIGHT * CELL_PIXELS) + 41, 20, 9, color);
-      display.setCursor(5, (MATRIX_HEIGHT * CELL_PIXELS) + 41); 
+      display.fillRect(3, (MATRIX_HEIGHT * CELL_PIXELS) + 41*TEXT_SIZE, 20*TEXT_SIZE, 9*TEXT_SIZE, color);
+      display.setCursor(5, (MATRIX_HEIGHT * CELL_PIXELS) + 41*TEXT_SIZE); 
       display.setTextColor(((mode == 'S') || (mode == 'E')) ? COLOR_EMPTY : COLOR_TEXT_1);  
       display.print("c");    
       display.setTextColor(((mode == 'S') || (mode == 'E')) ? COLOR_EMPTY : COLOR_TEXT_2);  
-      display.setCursor(15, (MATRIX_HEIGHT * CELL_PIXELS) + 42);
+      display.setCursor(15*TEXT_SIZE, (MATRIX_HEIGHT * CELL_PIXELS) + 42*TEXT_SIZE);
       display.print((char)(currentCellIndex + 0x41));
     }
     else if (option == OPTION_CELL_TYPE) {
-      display.fillRect(24, (MATRIX_HEIGHT * CELL_PIXELS) + 41, 20, 9, color);
+      display.fillRect(24*TEXT_SIZE, (MATRIX_HEIGHT * CELL_PIXELS) + 41*TEXT_SIZE, 20*TEXT_SIZE, 9*TEXT_SIZE, color);
       display.setTextColor(((mode == 'S') || (mode == 'E')) ? COLOR_EMPTY : COLOR_TEXT_1);
-      display.setCursor(25, (MATRIX_HEIGHT * CELL_PIXELS) + 42);
+      display.setCursor(25*TEXT_SIZE, (MATRIX_HEIGHT * CELL_PIXELS) + 42*TEXT_SIZE);
       printCellTypeToString(currentCell.type);
     }
     else if (option == OPTION_CELL_X) {
-      display.fillRect(3, (MATRIX_HEIGHT * CELL_PIXELS) + 51, 20, 9, color);
-      display.setCursor(5, (MATRIX_HEIGHT * CELL_PIXELS) + 51); 
+      display.fillRect(3, (MATRIX_HEIGHT * CELL_PIXELS) + 51*TEXT_SIZE, 20*TEXT_SIZE, 9*TEXT_SIZE, color);
+      display.setCursor(5, (MATRIX_HEIGHT * CELL_PIXELS) + 51*TEXT_SIZE); 
       display.setTextColor(((mode == 'S') || (mode == 'E')) ? COLOR_EMPTY : COLOR_TEXT_1);  
       display.print("x");    
       display.setTextColor(((mode == 'S') || (mode == 'E')) ? COLOR_EMPTY : COLOR_TEXT_2);  
-      display.setCursor(15, (MATRIX_HEIGHT * CELL_PIXELS) + 52);
+      display.setCursor(15*TEXT_SIZE, (MATRIX_HEIGHT * CELL_PIXELS) + 52*TEXT_SIZE);
       display.print((int)currentCell.x + 1);
     }
     else if (option == OPTION_CELL_Y) {
-      display.fillRect(24, (MATRIX_HEIGHT * CELL_PIXELS) + 51, 20, 9, color);
-      display.setCursor(25, (MATRIX_HEIGHT * CELL_PIXELS) + 51); 
+      display.fillRect(24*TEXT_SIZE, (MATRIX_HEIGHT * CELL_PIXELS) + 51*TEXT_SIZE, 20*TEXT_SIZE, 9*TEXT_SIZE, color);
+      display.setCursor(25*TEXT_SIZE, (MATRIX_HEIGHT * CELL_PIXELS) + 51*TEXT_SIZE); 
       display.setTextColor(((mode == 'S') || (mode == 'E')) ? COLOR_EMPTY : COLOR_TEXT_1);  
       display.print("y");    
       display.setTextColor(((mode == 'S') || (mode == 'E')) ? COLOR_EMPTY : COLOR_TEXT_2);  
-      display.setCursor(36, (MATRIX_HEIGHT * CELL_PIXELS) + 52);
+      display.setCursor(36*TEXT_SIZE, (MATRIX_HEIGHT * CELL_PIXELS) + 52*TEXT_SIZE);
       display.print((int)currentCell.y + 1);
     }
     else if (option == OPTION_CELL_OK) {
-      display.fillRect(47, (MATRIX_HEIGHT * CELL_PIXELS) + 41, 20, 19, color);
-      display.setCursor(51, (MATRIX_HEIGHT * CELL_PIXELS) + 47); 
+      display.fillRect(47*TEXT_SIZE, (MATRIX_HEIGHT * CELL_PIXELS) + 41*TEXT_SIZE, 20*TEXT_SIZE, 19*TEXT_SIZE, color);
+      display.setCursor(51*TEXT_SIZE, (MATRIX_HEIGHT * CELL_PIXELS) + 47*TEXT_SIZE); 
       display.setTextColor(((mode == 'S') || (mode == 'E')) ? COLOR_EMPTY : COLOR_TEXT_1);  
       display.print("OK");    
     }
