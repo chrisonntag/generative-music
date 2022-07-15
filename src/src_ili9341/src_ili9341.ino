@@ -188,7 +188,7 @@ void setup(void) {
   //CHANGE: display.clearScreen();
   display.fillScreen(ILI9341_BLACK);
   
-  display.setRotation(0);
+  display.setRotation(2);
   
   //CHANGE: display.scroll(0);
   display.setScrollMargins(0, 0);
@@ -222,16 +222,16 @@ void setup(void) {
 
   /* Mode X and Y */
   display.setTextColor(COLOR_TEXT_1);  
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 2, 22*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 72 /*51*/, 2, 9*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER); 
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 12*TEXT_SIZE, 30*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 22*TEXT_SIZE, 30*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
-  display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 76, 3); display.print("x");    
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 38*TEXT_SIZE, 22*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 72 /*51*/, 38*TEXT_SIZE, 9*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER); 
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 48*TEXT_SIZE, 30*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
-  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 30, 58*TEXT_SIZE, 30*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
-  display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 76, 39*TEXT_SIZE); display.print("y");    
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 50, 2, 22*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 92 /*51*/, 2, 9*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER); 
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 50, 12*TEXT_SIZE, 30*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 50, 22*TEXT_SIZE, 30*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 96, 3); display.print("x");    
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 50, 38*TEXT_SIZE, 22*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 92 /*51*/, 38*TEXT_SIZE, 9*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER); 
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 50, 48*TEXT_SIZE, 30*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.drawRect((MATRIX_WIDTH * CELL_PIXELS) + 50, 58*TEXT_SIZE, 30*TEXT_SIZE, 11*TEXT_SIZE, COLOR_BORDER);
+  display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 96, 39*TEXT_SIZE); display.print("y");    
   printOption(OPTION_PITCH_X, 'U');
   printOption(OPTION_MODE_X, 'U');
   printOption(OPTION_ORDER_X, 'U');
@@ -387,17 +387,17 @@ void printOption(byte option, char mode) {
   else if ((option >= OPTION_CELL_ID) && (option <= OPTION_CELL_OK)) goto fourth_area;
   else return;
   first_area:
-    display.fillRect((MATRIX_WIDTH * CELL_PIXELS) + 31, 3*TEXT_SIZE + (10*TEXT_SIZE * (option - OPTION_PITCH_X)), (option == OPTION_PITCH_X) ? 20*TEXT_SIZE : 28*TEXT_SIZE, 9*TEXT_SIZE, color);
+    display.fillRect((MATRIX_WIDTH * CELL_PIXELS) + 51, 3*TEXT_SIZE + (10*TEXT_SIZE * (option - OPTION_PITCH_X)), (option == OPTION_PITCH_X) ? 20*TEXT_SIZE : 28*TEXT_SIZE, 9*TEXT_SIZE, color);
     display.setTextColor(((mode == 'S') || (mode == 'E')) ? COLOR_EMPTY : COLOR_TEXT_2);  
-    display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 34, 4*TEXT_SIZE + (10*TEXT_SIZE * (option - OPTION_PITCH_X)));  
+    display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 54, 4*TEXT_SIZE + (10*TEXT_SIZE * (option - OPTION_PITCH_X)));  
     if (option == OPTION_PITCH_X) printPitchToNote(pitchX[currentScreen]);
     else if (option == OPTION_MODE_X) printModeToString(modeX[currentScreen]);
     else if (option == OPTION_ORDER_X) printOrderToString(orderX[currentScreen]);
     return;
   second_area:
-    display.fillRect((MATRIX_WIDTH * CELL_PIXELS) + 31, 39*TEXT_SIZE + (10*TEXT_SIZE * (option - OPTION_PITCH_Y)), (option == OPTION_PITCH_Y) ? 20*TEXT_SIZE : 28*TEXT_SIZE, 9*TEXT_SIZE, color);
+    display.fillRect((MATRIX_WIDTH * CELL_PIXELS) + 51, 39*TEXT_SIZE + (10*TEXT_SIZE * (option - OPTION_PITCH_Y)), (option == OPTION_PITCH_Y) ? 20*TEXT_SIZE : 28*TEXT_SIZE, 9*TEXT_SIZE, color);
     display.setTextColor(((mode == 'S') || (mode == 'E')) ? COLOR_EMPTY : COLOR_TEXT_2);  
-    display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 34, 40*TEXT_SIZE + (10*TEXT_SIZE * (option - OPTION_PITCH_Y)));  
+    display.setCursor((MATRIX_WIDTH * CELL_PIXELS) + 54, 40*TEXT_SIZE + (10*TEXT_SIZE * (option - OPTION_PITCH_Y)));  
     if (option == OPTION_PITCH_Y) printPitchToNote(pitchY[currentScreen]);
     else if (option == OPTION_MODE_Y) printModeToString(modeY[currentScreen]);
     else if (option == OPTION_ORDER_Y) printOrderToString(orderY[currentScreen]);
