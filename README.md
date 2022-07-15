@@ -3,6 +3,7 @@ Auto-generative music and dynamic patterns with Arduino.
 This Arduino-based project offers a graphical user interface on a connected TFT display, which lets you create 
 patterns of boxes that interact with each other and produce MIDI notes. 
 
+![arduino-gen](https://user-images.githubusercontent.com/5236298/179260323-1708863b-d131-485a-bac0-e5f9b80bc477.gif)
 
 
 ## Description
